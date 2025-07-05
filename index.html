@@ -1,2305 +1,1131 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link rel="stylesheet" href="jemdoc.css" type="text/css" />
-<title>Zhiyuan Wu</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="吴致远 - 清华大学计算机科学与技术系博士研究生，研究方向包括智算网络、并行策略、边云协同">
+    <title>吴致远的个人主页</title>
+    <link rel="icon" type="image/jpeg" href="picture/tsinghua.jpg">
+    <style>
+        :root {
+            /* 清华紫色系 - 更贴近清华标准色 */
+            --tsinghua-purple: #664498;
+            --tsinghua-purple-dark: #512a7a;
+            --tsinghua-purple-light: #8b6bb1;
+            --tsinghua-purple-lighter: #b8a2d1;
+            --tsinghua-purple-pale: #f4f1f8;
+            
+            /* 辅助色彩 */
+            --accent-gold: #d4af37;
+            --text-primary: #2c2c2c;
+            --text-secondary: #555555;
+            --text-muted: #777777;
+            --bg-white: #ffffff;
+            --bg-light: #fafafa;
+            --bg-section: #fdfdfd;
+            --border-light: #e8e8e8;
+            --shadow-light: rgba(102, 68, 152, 0.08);
+            --shadow-medium: rgba(102, 68, 152, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+            line-height: 1.65;
+            color: var(--text-primary);
+            background: var(--bg-light);
+            scroll-behavior: smooth;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- 新增：导航栏样式 --- */
+        .main-nav {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px); 
+            z-index: 1000;
+            box-shadow: 0 2px 12px var(--shadow-light);
+            transition: top 0.3s;
+        }
+
+        .main-nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap; /* 在小屏幕上自动换行 */
+            justify-content: center;
+            padding: 8px 0;
+        }
+
+        .main-nav li {
+            margin: 5px 18px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 8px 4px;
+            position: relative;
+            transition: color 0.3s ease;
+            font-size: 1.2em; /* <<< 已增大字体 */
+            display: block;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--tsinghua-purple) 0%, var(--accent-gold) 100%);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .main-nav a:hover {
+            color: var(--tsinghua-purple-dark);
+        }
+        
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+        /* --- 导航栏样式结束 --- */
+
+
+        /* Header Section - 清华风格 */
+        .header {
+            background: linear-gradient(135deg, var(--tsinghua-purple-dark) 0%, var(--tsinghua-purple) 50%, var(--tsinghua-purple-light) 100%);
+            color: white;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.03);
+            transform: rotate(15deg);
+            opacity: 0.6;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-gold) 0%, transparent 100%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* flex-direction: row-reverse; This moves the image to the right side */
+        }
+
+        .profile-image {
+            flex-shrink: 0;
+            margin-left: 150px;
+        }
+
+        .profile-image img {
+            width: 200px;
+            height: 300px;
+            border-radius: 16px; /* Changed from 50% to make it a square with rounded corners */
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .profile-info {
+            flex: 1;
+            min-width: 350px;
+            text-align: center;
+        }
+
+        .name-title {
+            font-size: 3.2em;
+            font-weight: 300;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .english-name {
+            font-size: 1.6em;
+            font-weight: 200;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .title {
+            font-size: 1.4em;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 25px 0;
+            align-items: center;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .links a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Motto Section - 简化设计 */
+        .motto {
+            text-align: center;
+            font-size: 1.5em;
+            color: var(--tsinghua-purple);
+            font-weight: 300;
+            margin: 50px 0;
+            padding: 40px 30px;
+            background: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow-light);
+            position: relative;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .motto::before {
+            content: '"';
+            font-size: 3em;
+            color: var(--tsinghua-purple-lighter);
+            position: absolute;
+            top: 15px;
+            left: 25px;
+            line-height: 1;
+        }
+
+        .motto::after {
+            content: '"';
+            font-size: 3em;
+            color: var(--tsinghua-purple-lighter);
+            position: absolute;
+            bottom: 5px;
+            right: 25px;
+            line-height: 1;
+        }
+
+        /* Section Styles - 清华学术风格 */
+        .section {
+            margin-bottom: 50px;
+            background: var(--bg-white);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: transform 0.2s ease;
+            padding-top: 70px; /* 新增：为锚点跳转增加顶部内边距，防止内容被导航栏遮挡 */
+            margin-top: -50px; /* 新增：抵消一部分内边距，保持视觉间距不变 */
+        }
+
+        .section:first-of-type {
+             margin-top: 0; /* 第一个section不需要负外边距 */
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 35px var(--shadow-medium);
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            color: var(--tsinghua-purple-dark);
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--tsinghua-purple-pale);
+            position: relative;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--tsinghua-purple) 0%, var(--accent-gold) 100%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        .about-content p {
+            margin-bottom: 25px;
+        }
+
+        .about-content a {
+            color: var(--tsinghua-purple);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .about-content a:hover {
+            border-bottom-color: var(--tsinghua-purple);
+            color: var(--tsinghua-purple-dark);
+        }
+
+        .about-content strong {
+            color: var(--tsinghua-purple-dark);
+            font-weight: 600;
+        }
+
+        /* Publications */
+        .publication-note {
+            font-size: 0.95em;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--tsinghua-purple-pale);
+            border-left: 4px solid var(--tsinghua-purple-light);
+            border-radius: 8px;
+        }
+
+        .publication-list {
+            list-style: none;
+        }
+
+        .publication-item {
+            margin-bottom: 35px;
+            padding: 30px;
+            background: var(--bg-section);
+            border-radius: 10px;
+            border-left: 4px solid var(--tsinghua-purple-lighter);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .publication-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 6px 25px var(--shadow-medium);
+            border-left-color: var(--tsinghua-purple);
+        }
+
+        .pub-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            color: var(--tsinghua-purple-dark);
+        }
+
+        .pub-title a {
+            color: var(--tsinghua-purple-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .pub-title a:hover {
+            color: var(--tsinghua-purple);
+        }
+
+        .pub-authors {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-size: 0.98em;
+            line-height: 1.5;
+        }
+
+        .pub-venue {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-size: 0.95em;
+        }
+
+        .pub-note {
+            font-size: 0.9em;
+            color: var(--tsinghua-purple);
+            font-weight: 500;
+        }
+
+        .pub-highlight {
+            color: #c53030;
+            font-weight: 600;
+            margin-top: 8px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Awards */
+        .award-list {
+            list-style: none;
+        }
+
+        .award-item {
+            margin-bottom: 25px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--bg-section) 0%, var(--bg-white) 100%);
+            border-radius: 10px;
+            border-left: 4px solid var(--tsinghua-purple);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .award-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 6px 25px var(--shadow-medium);
+        }
+
+        .award-title {
+            font-weight: 600;
+            color: var(--tsinghua-purple-dark);
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .award-highlight {
+            color: var(--tsinghua-purple);
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .award-year {
+            color: var(--text-muted);
+            float: right;
+            font-weight: 600;
+            background: var(--tsinghua-purple-pale);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        /* Service Section */
+        .service-subsection {
+            margin-bottom: 35px;
+        }
+
+        .service-title {
+            color: var(--tsinghua-purple-dark);
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.2em;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-item {
+            margin-bottom: 20px;
+            padding: 20px 25px;
+            background: linear-gradient(135deg, var(--bg-section) 0%, var(--bg-white) 100%);
+            border-radius: 8px;
+            border-left: 4px solid var(--tsinghua-purple-lighter);
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateX(6px);
+            box-shadow: 0 4px 20px var(--shadow-light);
+            border-left-color: var(--tsinghua-purple);
+        }
+
+        /* Projects */
+        .project-list {
+            list-style: none;
+        }
+
+        .project-item {
+            margin-bottom: 25px;
+            padding: 25px;
+            background: var(--bg-section);
+            border-radius: 8px;
+            border-left: 4px solid var(--tsinghua-purple-lighter);
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateX(6px);
+            box-shadow: 0 4px 20px var(--shadow-light);
+        }
+
+        .project-title {
+            font-weight: 600;
+            color: var(--tsinghua-purple-dark);
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .project-role {
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 2px solid var(--border-light);
+            text-align: center;
+            color: var(--text-muted);
+            background: var(--bg-white);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .footer a {
+            color: var(--tsinghua-purple);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--tsinghua-purple-dark);
+        }
+
+        .footer p {
+            margin: 10px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header {
+                padding: 60px 0 40px;
+            }
+
+            .profile-section {
+                display: flex;
+                align-items: center;
+                gap: 60px;
+                flex-wrap: wrap;
+                justify-content: center;
+                flex-direction: row-reverse; /* This moves the image to the right side */
+            }
+
+            .profile-image img {
+                width: 160px;
+                height: 240px;
+            }
+
+            .name-title {
+                font-size: 2.5em;
+            }
+
+            .english-name {
+                font-size: 1.3em;
+            }
+
+            .section {
+                padding: 30px 25px;
+                padding-top: 60px; /* 响应式调整锚点边距 */
+                margin-top: -40px;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .motto {
+                font-size: 1.3em;
+                padding: 30px 20px;
+            }
+
+            .links {
+                gap: 10px;
+            }
+
+            .links a {
+                padding: 10px 16px;
+                font-size: 0.9em;
+            }
+
+            .main-nav a {
+                font-size: 0.9em;
+            }
+
+            .main-nav li {
+                margin: 5px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name-title {
+                font-size: 2em;
+            }
+
+            .english-name {
+                font-size: 1.1em;
+            }
+
+            .section {
+                padding: 25px 20px;
+                padding-top: 55px; /* 响应式调整锚点边距 */
+                margin-top: -35px;
+            }
+
+            .motto {
+                font-size: 1.2em;
+                padding: 25px 15px;
+            }
+
+            .main-nav a {
+                font-size: 0.85em;
+            }
+
+             .main-nav li {
+                margin: 3px 6px;
+            }
+        }
+
+        /* 添加一些微妙的动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .section:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+
+        .section:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+    </style>
 </head>
 <body>
-    <div id="layout-content">
-        <div id="toptitle">
-            <h1>Zhiyuan Wu (Jerry)</h1>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <ul>
+                <li><a href="#about">个人简介</a></li>
+                <li><a href="#publications">学术论文</a></li>
+                <li><a href="#awards">奖项荣誉</a></li>
+                <li><a href="#service">学术服务</a></li>
+                <li><a href="#projects">科研项目</a></li>
+                <li><a href="#views">科研观点</a></li>
+            </ul>
         </div>
-        <table class="imgtable">
-            <tr>
-                <td>
-                    <a href="https://wuzhiyuan2000.github.io/"><img src="picture/wuzhiyuan.jpg" alt="alt text" width="165px" /></a>&nbsp;
-                </td>
-                <td align="left">
-                    <ul>
-                        <li>
-                            <p align="justify">
-                                Zhiyuan Wu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.ucas.ac.cn/"><img src="picture/cas.png" width="100px" height="100px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.ict.ac.cn/"><img src="picture/ict.jpeg" width="80px" height="80px" /></a><br />
-                            </p>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <p align="justify">
-                                <b>Research Assistant</b>,
-                                <a href="http://www.ict.ac.cn/">Institute of Computing Technology, Chinese Academy of Sciences</a>
-                                <br />
-                            </p>
-                        </li>
-                    </ul>
-
-                    <ul>
-                        <li>
-                            <p align="justify">
-                                Address: No.6, Kexueyuan South Road, Zhongguancun, Haidian District, Beijing, China
-                                <br />
-                            </p>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <p align="justify">
-                                Email: wuzhiyuan22s [at] ict.ac.cn; wuzhiyuan2000 [at] ieee.org<br />
-                            </p>
-                        </li>
-                    </ul>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="https://scholar.google.com/citations?user=Ry0tmJUAAAAJ&hl=en">[Google Scholar]</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="https://github.com/wuzhiyuan2000">[Github]</a>
-                    <!--
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="pdf/resume.pdf" target="_blank">[中文简历]</a>
-                    -->
-                </td>
-            </tr>
-        </table>
-        <h3><font color="191970">"The greatest truths are the simplest."</font></h3>
-        <!--<h3><font color="191970">做智能计算网络研究的引领者！</font></h3>-->
-    
-        <!--<h3><font color="191970">"Stay Hungry, Stay Foolish."</font></h3>-->
-        <h2><font color="Brown">About Me</font></h2>
-        <p align="justify">
-        I am a master’s candidate and a research assistant  at the <u>Institute of Computing Technology, Chinese Academy of Sciences</u> (ICT/CAS). 
-        My research lies at the intersection of federated learning, edge intelligence, and distributed computing.
-        Through the lens of distributed systems, I aim to develop scalable frameworks that bridge the gap between federated learning and edge computing, with a focus on communication efficiency, resource adaptability, and privacy preservation.
-        My long-term goal is to build intelligent network systems that enable seamless collaboration across highly distributed and resource-heterogeneous environments.
-        </p>
-
-        <p align="justify">
-            I am best known for my work on <u>Agglomerative Federated Learning (FedAgg)</u>, a pioneering resource-adaptive federated learning framework for large-scale model training through end-edge-cloud collaboration.
-            FedAgg has set a new paradigm in hierarchical federated learning, and has been recognized as <u>IEEE Xplore Top 1 Popular Article in INFOCOM 2024</u>.
-            I have also contributed to system-heterogeneous federated learning (e.g., <u>FedCache</u> and <u>FedICT</u>). 
-            I am a recipient of several awards, including the <u>President Special Prize</u> (the highest award at ICT/CAS) and multiple National Scholarships.
-            My publications have been recognized as Top Cited and Popular Articles in federated learning and edge computing communities.
-        </p>
-
-
-        <!--
-        <p align="justify">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            I'm currently a master’s candidate and a research assistant with the Institute of Computing Technology, Chinese Academy of Sciences (ICT/CAS). I am primarily supervised by Prof. Yuwei Wang, with collaborative guidance from Prof. Sheng Sun and Prof. Min Liu.
-        </p>
-        -->
-        <!--
-        <p align="justify">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            I possess interdisciplinary expertise in various areas of computer science and technology, including computer network, computer architecture, artificial intelligence, and information security.
-            I have published 10+ technical papers, including several technical papers published on top-tier conferences and journals as the first author in the fields of computer architecture, computer networks, and intelligent systems, including IEEE Transactions on Parallel and Distributed Systems (TPDS), IEEE Transactions on Mobile Computing (TMC), IEEE International Conference on Computer Communications (INFOCOM), and ACM Transactions on Intelligent Systems and Technology (TIST). Therein, the proposed FedCache pioneers cache-driven architecture over federated learning community and achieves two orders of magnitude in communication efficiency improvement compared with related state-of-the-art.
-            I have served as a technical program committee member or a reviewer for 10+ international conferences and journals, represented by IEEE Transactions on Mobile Computing (TMC), International Conference on Machine Learning (ICML), Advances in Neural Information Processing Systems (NeurIPS), and International Conference on Learning Representations (ICLR). <!--I am also invited to serve as a session chair for the International Conference on Computer Technology and Information Science (CTIS).-->
-            <!--I am a member of Institute of Electrical and Electronics Engineers (IEEE), Association for Computing Machinery (ACM), International Telecommunication Union (ITU) and China Computer Federation (CCF). I have been granted the President Special Prize (the highest award in ICT/CAS) and the National Scholarship.-->
-        
-        </p>
-        <!--正常应该在此处写一个简历，先不写-->
-        <!--call for papers-->
-        <!--<h2><font color="Brown">Biography</font></h2>-->
-        <!--
-    <h2><font color="Brown">Research Interests</font></h2>
-    <ul>
-
-
-        <li>
-            <p align="justify">
-                <b>
-                    Distributed Systems.
-                </b> Distributed architecture, distributed optimization, distributed machine learning.
-                <br />
-            </p>
-        </li>
-    
-        <li>
-            <p align="justify">
-                <b>Computer Network.</b> Mobile edge computing, cloud computing, compute first networking.
-                <br />
-            </p>
-        </li>
-    
-        <li>
-            <p align="justify">
-                <b>Security & Privacy.</b> Federated learning, privacy computing, system robustness.
-                <br />
-            </p>
-        </li>
-    
-    </ul>
-        -->
-
-
-        <!--
-        <h2><font color="Brown">News!!!</font></h2>
-
-        
-        <ul>
-            <li>
-                <p align="justify">
-                    2025.01: We Release an End-Edge-Cloud Collaborative Federated Learning Framework with Self-Rectified Knowledge Agglomeration! Access <a href="https://arxiv.org/abs/2501.00693">Here</a>.
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    2025.01: Our Papers Published in TPDS 2024 and INFOCOM 2024 Achieved the <b>Highest Number of Google Scholar Citations</b> in the Fields of Federated Learning and Edge Computing (as of Jan. 1, 2025)!
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.12: Our Two Live Streams on AiScholar have Attracted a Combined Audience of <b>More than 3,000 Participants</b>.
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.11: I am Awarded the National Scholarship.
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.10: Our works FedCache and FedAgg Published on INFOCOM 2024 and TMC 2024 are Selected as <b>Popular Articles in IEEE Xplore</b> (Ranking 1/256 and 15/984 Respectively as of Sep. 2024).
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.08: We Release a Comprehensive Benchmark for Federated Learning against Noisy Labels! Access <a href="https://d197for5662m48.cloudfront.net/documents/publicationstatus/220906/preprint_pdf/0078f9c6d5728acaa99b057148f5994c.pdf">Here</a>.
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.06: One Paper About <i>Asynchronous Federated Learning</i> is Accepted by <i>
-                        IEEE Transactions on Mobile Computing (<b>TMC, Computer Network, CCF Rank A</b>).
-                        <br />
-                    </i>
-                </p>
-            </li>
-        </ul>
-        
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.06: <i>"Research on Personalized Text Classification Based on Cache-Driven Federated Learning"</i> was Awarded <b>Outstanding Graduation Design</b> at Beijing Jiaotong University.
-                        <br />
-                    </i>
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.05: We Release the Second Version of Knowledge Cache-driven Federated Learning Architecture! Access <a href="https://arxiv.org/pdf/2405.13378">Here</a>.
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.05: One Paper Authored by <i>an Undergraduate Student from Beijing Jiaotong University</i> is Accepted by <i>International Conference on Knowledge Science, Engineering and Management (KSEM)</i>.
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.05: I am Selected as the Pacemaker to Merit Students, University of Chinese Academy of Sciences (<b>Top 1%</b>).
-                    <br />
-                </p>
-            </li>
-        </ul>
-        -->
-    
-        <!--
-    <ul>
-        <li>
-            <p align="justify">
-                2024.05: I will join <b><font color="Purple">Department of Computer Science and Technology, Tsinghua University</font></b> to pursue a PhD degree.
-                <br />
-            </p>
-        </li>
-    </ul>
-    -->
-
-
-    <!--
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.04: We Release a Concept Paper on <i>Privacy-Enhanced Training-as-a-Service (PTaaS)</i>, a Novel Service Computing Paradigm for On-device Intelligence. Access <a href="https://arxiv.org/abs/2404.10255">Here</a>.
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.02: One Paper About <i>Federated Learning Architecture Design</i> is Accepted by <i>
-                        IEEE Transactions on Mobile Computing (<b>TMC, Computer Network, CCF Rank A</b>).
-                    </i>
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    2024.01: I am Granted the President Special Prize (<b><font color="Red">The Highest Award in ICT/CAS, Top 0.2% in Master’s Students</font></b>).
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    2023.12: One Paper About <i>Proxy-data-free Federated Distillation</i> is Accepted by <i>
-                        ACM Transactions on Intelligent Systems and Technology (<b>TIST, Pattern Recognition and Intelligent Systems, CAA Rank A, Acceptance Rate 14.4%</b>).
-                    </i>
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    2023.12: One Paper About <i>End-Edge-Cloud Collaborative Federated Learning</i> is Accepted by <i>
-                        IEEE International Conference on Computer Communications (<b>INFOCOM, Computer Network, CCF Rank A, Acceptance Rate 19.6%</b>).
-                    </i>
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    2023.10: I am Awarded the National Scholarship (<b><font color="Red">The Only Master’s Student in ICT/CAS, Class of 2022, Top 0.4%</font></b>).
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    2023.06: One Paper About <i>Federated Learning in Multi-access Edge Computing</i> is Accepted by <i>
-                        IEEE Transactions on Parallel and Distributed Systems (<b><font color="Red">TPDS, Computer Architecture, CCF Rank A, No. 1 Impact Factor</font></b>).
-                    </i>
-                    <br />
-                </p>
-            </li>
-        </ul>
-   
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    2022.06: Received the Bachelor Degree from the College of Computer Science and Technology, Jilin University, Changchun, China, through the Tang Aoqing Honors Program.
-                    <br />
-                </p>
-            </li>
-        </ul>
-   
-        <ul>
-            <li>
-                <p align="justify">
-                    2021.12: Join in the Mobile Computing Research Group of Institute of Computing Technology, Chinese Academy of Sciences as a Research Assistant.
-                    <br />
-                </p>
-            </li>
-        </ul> -->
-        <!--
-    
-        <!--
-    <h2>Education</h2>
-    <ul>
-        <li>
-            <p align="justify">2022.08-Present: Master in Electronic Information with Institute of Computing Technology, Chinese Academy of Sciences, Beijing, China
-        <br /></p>
-        </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">2018.09-2022.06: Bachelor in the Tang Aoqing Honors Program (Major in Computer Science) with the College of Computer Science and Technology, Jilin University, Changchun, China<br /></p>
-            </li>
-        </ul>
-        -->
-        <!--<h1>Academia</h1>-->
-        <h2>Publications</h2>
-        <h3>Featured Publications</h3>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:0;margin-left:0;font-size:0.95em;">
-            <tbody>
-                <tr>
-                    <td style="padding:8px;width:30%;vertical-align:middle;border:none;"> <img src="./picture/paper2.jpg" width="300" /></td>
-                    <td style="padding:20px;width:70%;vertical-align:middle;border-right:none;border:none;">
-                        <p align="justify"><b>FedICT: Federated Multi-task Distillation for Multi-access Edge Computing.</b> </p>
-                        <p align="justify">Zhiyuan Wu, et al. <font color="Red"><b>ESI Highly Cited Paper in TPDS 2024</b></font> </p>
-                        <p align="justify">
-                            <!--
-                        Propose a distillation-based federated multi-task learning algorithm, FedICT, with FPKD for personalizing client-side distillation and LKA for correcting server-side distillation. FedICT enables efficient communication and heterogeneous on-device models without the assistance of a public dataset, and can be deemed as <b>the First Federated Distillation Algorithm on Multi-task Setting to be Practically Deployed in Multi-access Edge Computing</b>.
-                        -->
-                            We propose FedICT, a novel framework that resolves the trade-off between global model aggregation and personalized services in federated edge learning. FedICT enables end devices to perform multitask training in a communication-efficient and model-heterogeneous manner, and is suitable for multi-access edge computing.
-                        </p>
-    
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:0;margin-left:0;font-size:0.95em;">
-            <tbody>
-                <tr>
-                    <td style="padding:8px;width:30%;vertical-align:middle;border:none;"> <img src="./picture/infocom.png" width="300" /></td>
-                    <td style="padding:20px;width:70%;vertical-align:middle;border-right:none;border:none;">
-                        <p align="justify"><b>Agglomerative Federated Learning: Empowering Larger Model Training via End-Edge-Cloud Collaboration.</b> </p>
-                        <p align="justify">Zhiyuan Wu, et al. <font color="Red"><b>IEEE Xplore Top 1 Popular Article in INFOCOM 2024</b></font> </p>
-                        <p align="justify">
-                            We propose FedAgg, a novel hierarchical federated learning framework that leverages end-edge-cloud collaboration to perform recursive agglomeration with model-agnostic interaction protocols.
-                            FedAgg is the first framework to enable training larger models with ever-increasing capability tier by tier up to the cloud, and satisfy the privacy constraints of federated learning as well as the flexibility requirements of end-edge-cloud computing.
-                        </p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:0;margin-left:0;font-size:0.95em;">
-            <tbody>
-                <tr>
-                    <td style="padding:8px;width:30%;vertical-align:middle;border:none;"> <img src="./picture/fedcache.jpg" width="300" /></td>
-                    <td style="padding:20px;width:70%;vertical-align:middle;border-right:none;border:none;">
-                        <p align="justify"><b>FedCache: A Knowledge Cache-driven Federated Learning Architecture for Personalized Edge Intelligence.</b> </p>
-                        <p align="justify">Zhiyuan Wu, et al. IEEE Xplore Popular Article in TMC 2024. </p>
-                        <p align="justify">
-                            We propose FedCache, the first cache-driven federated learning architecture that guarantees satisfactory performance while conforming to personalized devices-side limitations in edge computing.
-                            FedCache improves communication efficiency by up to 278.9 times over previous architectures and can accommodate heterogeneous devices and asynchronous interactions.
-                        </p>
-    
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-
-        <h3>Selected Publications</h3>
-        <small>Note: <b><u>Bold & underlined</u></b> names indicate that I or my directly supervised students are the first authors.
-            An asterisk (*) denotes the corresponding author.
-            A dollar sign (<sup>$</sup>) indicates the popularity ranking based on IEEE Xplore (as of Sep. 2024). 
-            Both rankings are determined specifically by comparing papers published in the same year within the corresponding journal or conference.
-        </small>
-        
-        <ul>
-            <li>
-                <p align="justify">
-                    <a href="https://ieeexplore.ieee.org/document/10163770">
-                        FedICT: Federated Multi-task Distillation for Multi-access Edge Computing.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Sheng Sun, Yuwei Wang*, Min Liu, Quyang Pan, Xuefeng Jiang, and Bo Gao.<br />
-                    <i>IEEE Transactions on Parallel and Distributed Systems (TPDS). </i> 2024
-                    <br />
-                    (<b>Computer Architecture, CCF Rank A, No. 1 Impact Factor, with Only 162 Papers Accepted in Total</b>)
-                    <br />
-                    <b><font color="Red">ESI Highly Cited Paper</font></b>
-                    <br />
-                </p>
-            </li>
-
-
-
-
-
-            <li>
-                <p align="justify">
-                    <a href="https://ieeexplore.ieee.org/document/10621254">
-                        Agglomerative Federated Learning: Empowering Larger Model Training via End-Edge-Cloud Collaboration.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Sheng Sun, Yuwei Wang*, Min Liu, Bo Gao, Quyang Pan, Tianliu He, and Xuefeng Jiang.<br />
-                    <i>IEEE International Conference on Computer Communications (INFOCOM). </i> 2024
-                    <br />
-                    (<b>Computer Network, CCF Rank A, Acceptance Rate 19.6%</b>)
-                    <br />
-                    <b><font color="Red">IEEE Xplore Popular Article, Rank 1/256 in INFOCOM 2024, Rank 3/1000+ in INFOCOM Proceedings<sup>$</sup></font></b>
-                    <br />
-                </p>
-            </li>
-
-
-            
-            <li>
-                <p align="justify">
-                    <a href="https://ieeexplore.ieee.org/document/10420495">
-                        FedCache: A Knowledge Cache-driven Federated Learning Architecture for Personalized Edge Intelligence.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Sheng Sun, Yuwei Wang*, Min Liu, Ke Xu, Wen Wang, Xuefeng Jiang, Bo Gao, and Jinda Lu.<br />
-                    <i>IEEE Transactions on Mobile Computing (TMC). </i> 2024
-                    <br />
-                    (<b>Computer Network, CCF Rank A</b>)
-                    <br />
-                    <b><font color="Red">IEEE Xplore Popular Article, Rank 15/984 in TMC 2024<sup>$</sup></font></b>
-                    <br />
-                </p>
-            </li>
-
-            <li>
-                <p align="justify">
-                    <a href="https://dl.acm.org/doi/10.1145/3639369">
-                        Exploring the Distributed Knowledge Congruence in Proxy-data-free Federated Distillation.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Sheng Sun, Yuwei Wang*, Min Liu, Quyang Pan, Junbo Zhang, Zeju Li, and Qingxiang Liu.<br />
-                    <i>ACM Transactions on Intelligent Systems and Technology (TIST). </i> 2024
-                    <br />
-                    (<b>Pattern Recognition and Intelligent Systems, CAA Rank A, Acceptance Rate 14.4%</b>)
-                    <br />
-                </p>
-            </li>
-            
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Recursive Offloading for LLM Serving in Multi-tier Networks.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Sheng Sun, Yuwei Wang*, Bo Gao, Jinda Lu, Zheming Yang, Tian Wen.<br />
-                    Under Review in <i>IEEE Transactions on Parallel and Distributed Systems (TPDS). </i> 2025
-                    <br />
-                    (<b>Computer Architecture, CCF Rank A, No. 1 Impact Factor</b>)
-                    <br />
-                </p>
-            </li>
-
-
-            <li>
-                <p align="justify">
-                    <a href="https://arxiv.org/abs/2501.00693">
-                        Beyond Model Scale Limits: End-Edge-Cloud Federated Learning with Self-Rectified Knowledge Agglomeration.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Sheng Sun, Yuwei Wang*, Min Liu, Ke Xu, Quyang Pan, Bo Gao, and Tian Wen.<br />
-                    Under Review in <i>IEEE/ACM Transactions on Networking (ToN). </i> 2025
-                    <br />
-                    (<b>Computer Network, CCF Rank A</b>)
-                </p>
-            </li>
-
-
-
-            
-        <!--
-            <li>
-                <p align="justify">
-                    <a href="">
-                        PPVFD: A Privacy-Preserving and Verifiable Aggregation Framework for Federated Distillation.
-                    </a>
-                    <br />
-                    <b><u>Tian Wen</u></b>, Sheng Sun, Yuwei Wang*, Min Liu, Zhiyuan Wu.<br />
-                    Under Review in <i>IEEE Symposium on Security and Privacy (S&P). </i> 2024
-                    <br />
-                    (<b>Information Security, CCF Rank A</b>)
-                    <br />
-                </p>
-            </li>
-        -->
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        FedCache 2.0: Federated Edge Learning with Knowledge Caching and Dataset Distillation.
-                    </a>
-                    <br />
-                    <b><u>Quyang Pan</u></b>, Sheng Sun, Zhiyuan Wu, Yuwei Wang*, Min Liu, Bo Gao.<br />
-                    Under Review in <i>IEEE Transactions on Mobile Computing (TMC). </i> 2024
-                    <br />
-                    (<b>Computer Network, CCF Rank A</b>)
-                    <br />
-                </p>
-            </li>
-
-
-            <li>
-                <p align="justify">
-                    <a href="https://ieeexplore.ieee.org/document/10561520">
-                        Staleness-Controlled Asynchronous Federated Learning: Accuracy and Efficiency Tradeoff.
-                    </a>
-                    <br />
-                    Sheng Sun, Zengqi Zhang, Quyang Pan, Min Liu*, Yuwei Wang, Tianliu He, Yali Chen, and Zhiyuan Wu.<br />
-                    <i>IEEE Transactions on Mobile Computing (TMC). </i> 2024
-                    <br />
-                    (<b>Computer Network, CCF Rank A</b>)
-                    <br />
-                </p>
-            </li>
-            
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        FNBench: Benchmarking Robust Federated Learning against Noisy Labels.
-                    </a>
-                    <br />
-                    Xuefeng Jiang, Jia Li, Nannan Wu, Zhiyuan Wu, Xujing Li, Sheng Sun, Gang Xu, Yuwei Wang, Qi Li, Min Liu*.<br />
-                    Major Revision in <i>IEEE Transactions on Dependable and Secure Computing (TDSC).</i> 2024
-                    <br />
-                    (<b>Information Security, CCF Rank A</b>)
-                    <br />
-                </p>
-            </li>
-
-
-
-            <li>
-                <p align="justify">
-                    <a href="https://arxiv.org/abs/2401.00622">
-                        Federated Class-Incremental Learning with New-Class Augmented Self-Distillation.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Tianliu He, Sheng Sun, Yuwei Wang*, Min Liu, Bo Gao, and Xuefeng Jiang.<br />
-                    Minor Revision in <i>Journal of Computer Science and Technology (JCST).</i> 2024
-                    <br />
-                    (Interdisciplinarity, CCF Rank B)
-                    <br />
-                </p>
-            </li>
-
-
-
-
-            <li>
-                <p align="justify">
-                    <a href="https://arxiv.org/abs/2404.10255">
-                        Privacy-Enhanced Training-as-a-Service for On-Device Intelligence: Concept, Architectural Scheme, and Open Problems.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Sheng Sun, Yuwei Wang*, Bo Gao, Tianliu He, and Wen Wang.<br />
-                    <i>arXiv preprint arXiv:2404.10255.</i> 2024
-                    <br />
-                </p>
-            </li>
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Survey of Knowledge Distillation in Federated Edge Learning.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Sheng Sun, Yuwei Wang*, Min Liu, Xuefeng Jiang, Runhan Li, and Bo Gao.<br />
-                    <i>arXiv preprint arXiv:2301.05849.</i> 2023
-                    <br />
-                </p>
-            </li>
-
-
-
-
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Improving Communication Efficiency of Federated Distillation via Accumulating Local Updates.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Sheng Sun, Yuwei Wang*, Min Liu, Tian Wen, Wen Wang, and Bo Gao.<br />
-                    <i>arXiv preprint arXiv:2312.04166.</i> 2023
-                </p>
-            </li>
-
-
-
-
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Spirit Distillation: A Model Compression Method with Multi-domain Knowledge Transfer.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Yu Jiang, Minghao Zhao, Chupeng Cui, Zongmin Yang, Xinhui Xue, and Hong Qi*.<br />
-                    <i>International Conference on Knowledge Science, Engineering and Management (KSEM).</i> 2021
-                    <br />
-                    (Artificial Intelligence, CCF Rank C)
-                    <br />
-                </p>
-            </li>
-    
-            <li>
-                <p align="justify">
-                    <a>
-                        Activation Map Adaptation Model for Knowledge Distillation.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Hong Qi, Yu Jiang*, Chupeng Cui, Zongmin Yang, Xinhui Xue.<br />
-                    <i>Journal of Jilin University (Science Edition).</i> 2022
-                    <br />
-                    (Chinese Core Journal)
-                    <br />
-                </p>
-            </li>
-
-
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Spirit Distillation: Precise Real-time Semantic Segmentation of Road Scenes with Insufficient Data.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Hong Qi, Yu Jiang*, Chupeng Cui, Zongmin Yang, Xinhui Xue.<br />
-                    <i>arXiv preprint arXiv:2103.13733.</i> 2021
-                    <br />
-                </p>
-            </li>
-
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        The Three Essences of Academic Innovation: Direction, Methodology, and Attitude.
-                    </a>
-                    <br />
-                    <b><u>Zhiyuan Wu</u></b>, Yuwei Wang*, Sheng Sun, Tian Wen.<br />
-                    <i>ICT Alumini Gazette.</i> 2024
-                    <br />
-                </p>
-            </li>
-
-
-
-
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Logits Poisoning Attack in Federated Distillation.
-                    </a>
-                    <br />
-                    <b><u>Yuhan Tang</u></b> (Undergraduate in BJTU), Zhiyuan Wu, Bo Gao*, Tian Wen, Yuwei Wang, Sheng Sun<br />
-                    <i>International Conference on Knowledge Science, Engineering and Management (KSEM).</i> 2024
-                    <br />
-                    (Artificial Intelligence, CCF Rank C)
-                    <br />
-                </p>
-            </li>
-
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Peak-Controlled Logits Poisoning Attack in Federated Distillation.
-                    </a>
-                    <br />
-                    <b><u>Yuhan Tang</u></b> (Undergraduate in BJTU), Aoxu Zhang, Zhiyuan Wu, Bo Gao*, Tian Wen, Yuwei Wang, Sheng Sun<br />
-                    Major Revision in <i>Discover Computing (DC).</i> 2024
-                    <br />
-                    (Data Mining, CCF Rank C)
-                    <br />
-                </p>
-            </li>
-
-             <li>
-                <p align="justify">
-                    <a href="">
-                        NET-SM4: A High-performance Secure Encryption Mechanism Based on In-Network Computing.
-                    </a>
-                    <br />
-                    <b><u>Wen Wang</u></b>, Shuyong Zhu*,Tianyu Zuo, Zhiyuan Wu, Yujun Zhang.<br />
-                    <i>IEEE/ACM International Symposium on Quality of Service (IWQoS).</i> 2025
-                    <br />
-                    (Computer Network, CCF Rank B)
-                    <br />
-                </p>
-            </li>
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        RADD: A Real-time and Accurate Method for DDoS Detection Based on In-Network Computing.
-                    </a>
-                    <br />
-                    <b><u>Wen Wang</u></b>, Shuyong Zhu*, Zhiyuan Wu, Lu Lu, Zhiqiang Li, Hongwei Yang, Yujun Zhang.<br />
-                    <i>IEEE International Conference on Communications (ICC).</i> 2024
-                    <br />
-                    (Computer Network, THU Rank B)
-                    <br />
-                </p>
-            </li>
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Towards Efficient Secure Aggregation Based on In-Network Computing.
-                    </a>
-                    <br />
-                    <b><u>Wen Wang</u></b>, Shuyong Zhu*, Qingqing Ren, Zhiyuan Wu, Yujun Zhang.<br />
-                    <i>	IEEE/ACM International Symposium on Quality of Service (IWQoS). </i> 2025
-                    <br />
-                    (Computer Network, CCF Rank B, Poster)
-                    <br />
-                </p>
-            </li>
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        SVAFD: A Secure and Verifiable Co-Aggregation Protocol for Federated Distillation.
-                    </a>
-                    <br />
-                    <b><u>Tian Wen</b></u>, Sheng Sun, Yuwei Wang*, Peiyan Chen, Zhiyuan Wu, Min Liu, Bo Gao.<br />
-                    <i>arXiv preprint arXiv:2505.13319.</i> 2025
-                </p>
-            </li>
-
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Tackling Noisy Clients in Federated Learning with End-to-end Label Correction.
-                    </a>
-                    <br />
-                    Xuefeng Jiang, Sheng Sun, Jia Li, Jingjing Xue, Runhan Li, Zhiyuan Wu, Gang Xu, Yuwei Wang and Min Liu*.<br />
-                    <i>ACM International Conference on Information and Knowledge Management (CIKM). </i> 2024
-                    <br />
-                    (Data Mining, CCF Rank B)
-                    <br />
-                </p>
-            </li>
-
-
-
-    
-            <li>
-                <p align="justify">
-                    <a href="">
-                        Federated Skewed Label Learning with Logits Fusion.
-                    </a>
-                    <br />
-                    Yuwei Wang, Hao Tan, Runhan Li, Xuefeng Jiang, Sheng Sun, Min Liu*, Bo Gao, Zhiyuan Wu.<br />
-                    <i>arXiv preprint arXiv:2311.08202.</i> 2023
-                </p>
-            </li>
-
-
-            
-    
-            <!--
-
-
-
-
-
-
-
-
-        
-                <li>
-            <p align="justify">
-                <a href="">
-                    SessCade+LEND,
-                </a>
-                <br />
-                SIGCOMM+KDD.<br />
-                <i>IWQoS</i> 2025
-                <br />
-                (Computer Network, CCF Rank A)
-                <br />
-            </p>
-        </li>
-
-
-        <li>
-            <p align="justify">
-                <a href="">
-                    Secure FD
-                </a>
-                <br />
-                CCS.<br />
-                <i>IWQoS</i> 2025
-                <br />
-                (Computer Network, CCF Rank A)
-                <br />
-            </p>
-        </li>
-            -->
-
-
-        </ul>
-
-
-        <h2>Selected Awards</h2>
-        <!--<h3>During Postgraduate</h3>-->
-
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    President Special Prize (<b><font color="Red">The Highest Award in ICT/CAS, Top 0.2% in Master’s Students</font></b>), 2024
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Nomination for the President’s Award of the Chinese Academy of Sciences (<b><font color="Red">The Only Master’s Student in ICT/CAS,Top 0.2%</font></b>), 2025
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-        <ul>
-            <li>
-                <p align="justify">
-                    National Scholarship (<b><font color="Red">The Only Master’s Student in ICT/CAS, Class of 2022, Top 0.4%</font></b>), 2023
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    National Scholarship, 2024
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Pacemaker to Merit Students (<b>Top 1%</b>), 2024
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-         <ul>
-            <li>
-                <p align="justify">
-                    Outstanding Graduate of Beijing, 2025
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Outstanding Graduate, 2025
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Efunda Fintech Freshman Scholarship (<b>The Only Student in Network Research Department, ICT/CAS, Class of 2022, Top 2.1%</b>), 2023
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Excellent Research Assistant, 2023-2024
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Merit Student, 2023
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    First-class Scholarship, 2023
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Academic Scholarship of University of Chinese Academy of Sciences, 2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-    <!--
-        <ul>
-            <li>
-                <p align="justify">
-                    Elesiver Reviewer Recognition, 2023
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    ICDATE Certificate of Appreciation, 2023
-                    <br />
-                </p>
-            </li>
-        </ul>
-        -->
-
-        <!--
-        <h3>During Undergraduate</h3>
-        <ul>
-            <li>
-                <p align="justify">
-                    Project Leader of Innovation Training Project for Undergraduates, National Excellent Completion (<b>The 1st Group in CCST, JLU, 1/72</b>), 2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    PAT Program Ability Test (Advanced Level, <b>Rank 1/1085</b>), 2019
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    National Computer Proficiency Challenge for Undergraduates, National First Prize (Programming Competition, <b>Top 2%</b>), 2019
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Nomination of Outstanding Undergraduate Thesis, 2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Nomination of Elite Undergraduate Student Award (Livon), 2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Scholarship of Intelligent Substrate Co-education of Jilin University, 2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Honorable Speaker on the 1st Undergraduate Academic Exchange Conference of Jilin University, 2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Scholarship of Tang Aoqing Honors Program of Research and Practice, 2020-2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Academic Scholarship, 2020-2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Outstanding Student Cadres, 2019-2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Merit Student, 2020, 2022
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Interdisciplinary Contest in Modeling, Meritorious Winner, 2021
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    One of the First Inductees of the Plan for Cultivating Top-notch Students of Basic Disciplines, China, 2018
-                    <br />
-                </p>
-            </li>
-        </ul>
-        -->
-
-
-
-        <h2>Academic Service</h2>
-        <!--<h3>Academic Organization Membership</h3>
-    -->
-        <!--
-        <ul>
-            <li>
-                <p align="justify">
-                    Member of Distributed Computing and Systems Specialized Committee, China Computer Federation (CCF-DC)
-                    <br />
-                </p>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <p align="justify">
-                    Member of Internet Specialized Committee, China Computer Federation (CCF-NET)
-                    <br />
-                </p>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <p align="justify">
-                    Member of Artificial Intelligence and Pattern Recognition Specialized Committee, China Computer Federation (CCF-AI)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Member of Institute of Electrical and Electronics Engineers (IEEE)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Member of Institute of IEEE Communications Society (ComSoc)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Association for Computing Machinery (ACM)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Member of International Telecommunication Union (ITU)
-                    <br />
-                </p>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <p align="justify">
-                    Member of China Computer Federation (CCF)
-                </p>
-            </li>
-        </ul>
--->
-
-        <!--
-    <h3>Journal Guest Editor/ Conference Area Chair</h3>
-
-
-    <ul>
-        <li>
-            <p align="justify">Journal of Robotics and Automation Research (JRAR)<br /></p>
-        </li>
-    </ul>
-    -->
-        <!--
-    <h3>Area Chair/ Session Chair</h3>
-    
-    <ul>
-        <li>
-            <p align="justify">International Conference on Computer Technology and Information Science (CTIS)<br /></p>
-        </li>
-    </ul>
-        -->
-    
-        <h3>Journal Reviewer</h3>
-
-
-        
-
-
-        <ul>
-            <li>
-                <p align="justify">IEEE Transactions on Mobile Computing (TMC, Computer Networks, CCF Rank A)<br /></p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI, Artificial Intelligence, CCF Rank A)<br /></p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">Information Fusion (INFFUS, Pattern Recognition and Intelligent Systems, CAA Rank A)<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">Pattern Recognition (PR, Pattern Recognition and Intelligent Systems, CAA Rank A)<br /></p>
-            </li>
-        </ul>
-    
-        <h3>Conference Technical Program Committee/ Conference Reviewer</h3>
-
-
-        <ul>
-            <li>
-                <p align="justify">International Conference on Machine Learning (ICML, Artificial Intelligence, CCF Rank A)<br /></p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">Advances in Neural Information Processing Systems (NeurIPS, Artificial Intelligence, CCF Rank A)<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">International Conference on Learning Representations (ICLR, Artificial Intelligence, THU Rank A)<br /></p>
-            </li>
-        </ul>
-
-
-
-        <ul>
-            <li>
-                <p align="justify">AAAI Conference on Artificial Intelligence (AAAI, Artificial Intelligence, CCF Rank A)<br /></p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">International Joint Conference on Artificial Intelligence (IJCAI, Artificial Intelligence, CCF Rank A)<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">ACM International Conference on Multimedia (ACM MM, Multimedia, CCF Rank A)<br /></p>
-            </li>
-        </ul>
-    
-
-    <!--
-
-        <ul>
-            <li>
-                <p align="justify">IEEE Global Communications Conference (Globecom, Computer Network, THU Rank B)<br /></p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">Annual Meeting of the Cognitive Science Society (CogSci, Interdisciplinarity, CCF Rank B)<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP, Multimedia, CCF Rank B)<br /></p>
-            </li>
-        </ul>
-    
-        
-    <ul>
-        <li>
-            <p align="justify">Intelligent Systems Conference (IntelliSys)<br /></p>
-        </li>
-    </ul>
-    
-    <ul>
-        <li>
-            <p align="justify">Computing Conference (CC)<br /></p>
-        </li>
-    </ul>
-    
-    <ul>
-        <li>
-            <p align="justify">Future of Information and Communication Conference (FICC)<br /></p>
-        </li>
-    </ul>
-    
-    <ul>
-        <li>
-            <p align="justify">International Conference on Computer Technology and Information Science (CTIS)<br /></p>
-        </li>
-    </ul>
-    
-    <ul>
-        <li>
-            <p align="justify">International Conference on Digital Applications, Transformation & Economy (ICDATE)<br /></p>
-        </li>
-    </ul>
-    
-    <ul>
-        <li>
-            <p align="justify">International Conference on Internet of Things and Intelligent Information Processing (IoTIIP)<br /></p>
-        </li>
-    </ul>
-    
-        -->
-
-
-
-        <h2>Selected Activities</h2>
-
-        <h3>Invited Talks/ Technical Report</h3>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    DeepSeek: Pioneering Your Academic Future. 2025<br />
-                    AiScholar (25000+ Live Stream Audience)
-                </p>
-            </li>
-        </ul>
-
-        <ul>
-            <li>
-                <p align="justify">
-                    AI-Assisted Chart Design and Creation. 2025<br />
-                    AiScholar (8000+ Live Stream Audience)
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    DeepSeek: Ushering in a New Era of Intelligent Scientific Research. 2025<br />
-                    AiScholar (Paid Lecture, 1100+ Live Stream Audience, 600+ Simultaneous Online Audience)
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    A Comprehensive Guide to Graduate School Recommendations for Computer Science Students. 2025<br />
-                    College of Computer Science and Technology, Jilin University
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    From Beginner to Expert: Progressing in Scientific Research. 2025<br />
-                    College of Computer Science and Technology, China University Of Petroleum
-                </p>
-            </li>
-        </ul>
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    From Beginner to Expert: Progressing in Scientific Research. 2024<br />
-                    AiScholar (1800+ Live Stream Audience)
-                </p>
-            </li>
-        </ul>
-        
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Getting Started with Computer Science Research: A Beginner's Guide. 2024<br />
-                    AiScholar (1600+ Live Stream Audience)
-                </p>
-            </li>
-        </ul>
-
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Undergraduate Research Blueprint: Exploration and Practice. 2024<br />
-                    College of Computer Science and Technology, Jilin University
-                </p>
-            </li>
-        </ul>
-        
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Performance Optimization of Federated Learning in Heterogeneous Edge Networks. 2024<br />
-                    Graduate Academic Forum of University of Chinese Academy of Sciences
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Setting Sail in Academia: A Research Blueprint for Graduate Students Major in Computer Science. 2024<br />
-                    School of Computer Science and Technology, University of Chinese Academy of Sciences
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Agglomerative Federated Learning: Empowering Larger Model Training via End-Edge-Cloud Collaboration. 2024<br />
-                    On the 43th Annual IEEE International Conference on Computer Communications (INFOCOM 2024)
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Cache-driven Federated Learning for Personalized Edge Intelligence: Research Progress and Open Problems. 2024<br />
-                    Network System and Machine Learning Group, School of Computer Science, Peking University
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    End-Edge-Cloud Collaborative Intelligence Based on Federated Distillation. 2024<br />
-                    Shi Shuo Ji Yu Academic Forum
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Pioneer Guide for Undergraduate Research. 2024<br />
-                    College of Computer Science and Technology, Jilin University
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Distributed Computing and Federated Learning. 2023<br />
-                    Shi Shuo Ji Yu Academic Forum
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Synergistic Development of Computer Network and Artificial Intelligence: Exploration and Practice. 2023<br />
-                    Institute of Computing Technology, Chinese Academy of Sciences
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Federated Learning Key Technologies. 2023<br />
-                    Datang Telecom Technology & Industry Group
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Ramblings on Undergraduate Research. 2022<br />
-                    College of Computer Science and Technology, Jilin University
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Acceptance Speech of Scholarship of Intelligent Substrate Co-education of Jilin University. 2021<br />
-                    College of Computer Science and Technology, Jilin University and Huawei Technologies Co. Ltd.
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Federated Learning. 2021<br />
-                    College of Computer Science and Technology, Jilin University
-                </p>
-            </li>
-        </ul>
-    
-        <!--
-    <ul>
-        <li>
-            <p align="justify">
-                2021.10: Federated Learning.<br />
-                For Sensor Networks & Ambient Intelligence Group, College of Computer Science and Technology, Jilin University
-            </p>
-        </li>
-    </ul>
-        -->
-    
-        <ul>
-            <li>
-                <p align="justify">Spirit Distillation: A Model Compression Method with Multi-domain Knowledge Transfer. 2021<br />On the 14th International Conference on Knowledge Science, Engineering and Management (KSEM2021)</p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Opening Speech for Jilin University English Summer Camp. 2020<br />
-                    Jilin University
-                </p>
-            </li>
-        </ul>
-
-        <!--
-        <h3>Competition/Award Subreferee</h3>
-        <ul>
-            <li>
-                <p align="justify">
-                    China Graduate Contest on Smart-city Technology and Creative Design. 2023
-                </p>
-            </li>
-        </ul>
-        -->
-        <!--<h1>Industria</h1>-->
-
-        <h3>Conference/ Symposium Suborganizer</h3>
-
-
-        <ul>
-            <li>
-                <p align="justify">Graduate Dissertation Defense, Institute of Computing Technology, Chinese Academy of Sciences, Beijing, China. 2024<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">The 5th ACM Turing Award Celebration Conference (TURC2023), Wuhan, China. 2023<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">International Telecommunication Union Telecommunication Standardization Sector Study Groups 16: Multimedia (ITU-T SG16), Geneva, Switzerland. 2022<br /></p>
-            </li>
-        </ul>
-    
-        <h3>Conference/ Symposium Participation</h3>
-
-
-
-        
-
-        <ul>
-            <li>
-                <p align="justify">Deepseek Unveiled: Decrypting the Secrets (ICT and USTC), Beijing, China. 2025<br /></p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">Symposium on Federated Multimodal Large Model Training (ICT and China Unicom), Beijing, China. 2025<br /></p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">Symposium on Large Model Training and Inference (ICT and Huawei), Beijing, China. 2024<br /></p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">Large-scale Distributed and Trustworthy Intelligent Computing Architecture (ICT, Zhejiang Lab and ZSTU), Beijing, China. 2024<br /></p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">The 43th Annual IEEE International Conference on Computer Communications (INFOCOM 2024), Vancouver, Canada. 2024<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">Symposium on Privacy Computing and Data Security (ICT and DTT), Beijing, China. 2023<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">International Telecommunication Union Telecommunication Standardization Sector Study Groups 16: Multimedia (ITU-T SG16), Geneva, Switzerland. 2023<br /></p>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <p align="justify">Symposium on Application of Privacy Computing Technology in Inclusive Financial Engineering (ICT and HXB), Nanjing, China. 2022<br /></p>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <p align="justify">Symposium on Federated Learning Key Technologies for Edge-side Lightweighting (ICT and CMCC), Beijing, China. 2022<br /></p>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <p align="justify">The 14th International Conference on Knowledge Science, Engineering and Management (KSEM2021), Tokyo, Japan. 2021<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">The 4th Academic Exchange Symposium of Top Students in Basic Subjects, Changchun, China. 2019<br /></p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    The 16th China National Computer Conference (CNCC2019), Soochow, China. 2019
-                    <br />
-                </p>
-            </li>
-        </ul>
-        <h2>Professional Standards</h2>
-        <ul>
-            <li>
-                <p align="justify">
-                    IEEE Std 802.1Qch-2017: IEEE Standard for Local and Metropolitan Area Networks—Bridges and Bridged Networks—Amendment 29: Cyclic Queuing and Forwarding.
-                    <br />
-                    <i>ISO/IEC/IEEE 8802-1Q:2016/Amd 7. </i> 2018(E) <br />(Participate in Sinicization)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    IEEE Std 802.1Qci-2017: IEEE Standard for Local and Metropolitan Area Networks—Bridges and Bridged Networks—Amendment 28: Per-Stream Filtering and Policing.
-                    <br />
-                    <i>ISO/IEC/IEEE 8802-1Q:2016/Amd 6. </i> 2018(E) <br />(Participate in Sinicization)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    IEEE Std 802.1Qbz-2016: IEEE Standard for Local and Metropolitan Area Networks—Bridges and Bridged Networks—Amendment 27: Enhancements to Bridging of IEEE 802.11 Media.
-                    <br />
-                    <i>ISO/IEC/IEEE 8802-1Q:2016/FDAM 5. </i> 2017(E) <br />(Participate in Sinicization)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Technical Requirements for Device-Edge-Cloud Collaborative Federated Learning in Edge Networks.
-                    <br />
-                    <i>Communications Industry Standards of People's Republic of China. </i> 2023 <br />(Participate in Revision)
-                    <br />
-                </p>
-            </li>
-        </ul>
-        <h2>Projects</h2>
-    
-        <h3>Featured Projects</h3>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:0;margin-left:0;font-size:0.95em;">
-            <tbody>
-                <tr>
-                    <td style="padding:8px;width:30%;vertical-align:middle;border:none;"> <img src="./picture/mindspore.png" width="300" /></td>
-                    <td style="padding:20px;width:70%;vertical-align:middle;border-right:none;border:none;">
-                        <p align="justify"><b>MindSpore Network Model and Federated Innovation Collaboration.</b> </p>
-                        <p align="justify">Huawei Technologies Co. Ltd. </p>
-                        <p align="justify"> <a href="https://github.com/mindspore-ai/mindspore">MindSpore</a> is an open AI framework supported by Huawei Technologies Co. Ltd. that matches with Ascend processors and supports multi-processor architectures. Before Feb. 2023, MindSpore has gained more than 3.3k stars on github, and is awarded <b><a href="https://github.com/youngfish42/Awesome-Federated-Learning-on-Graph-and-Tabular-Data#federated-learning-framework">the World's 3rd Most Popular Federated Learning Framework</a></b>, only inferior to PySyft and FATE.  I was involved in integrating the server communication module with the asynchronous federated learning and client selection functional modules in the framework.</b></p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:0;margin-left:0;font-size:0.95em;">
-            <tbody>
-                <tr>
-                    <td style="padding:8px;width:30%;vertical-align:middle;border:none;"> <img src="./picture/gb.png" width="300" /></td>
-                    <td style="padding:20px;width:70%;vertical-align:middle;border-right:none;border:none;">
-                        <p align="justify"><b>China's National Standard Acquisition.</b> </p>
-                        <p align="justify">Standardization Administration of the People's Republic of China. </p>
-                        <p align="justify">
-                            China's national standard acquisition is to convert the content of international standards into China national standards after investigation, analysis, research and experimental verification. The converted international standards are approved and released according to Chinese regulations.
-                            I have participated in the sinicization of 3 IEEE professional standards related to computer networks and communications, including IEEE Std 802.1Qch-2017, IEEE Std 802.1Qci-2017 and IEEE Std 802.1Qbz-2016.
-                        </p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:0;margin-left:0;font-size:0.95em;">
-            <tbody>
-                <tr>
-                    <td style="padding:8px;width:30%;vertical-align:middle;border:none;"> <img src="./picture/ict-2.png" width="300" /></td>
-                    <td style="padding:20px;width:70%;vertical-align:middle;border-right:none;border:none;">
-                        <p align="justify">
-                            <b>
-                                Federated Learning-based Intelligent Scheduling and Collaborative Optimization at the Edge of Cloud Networks.
-                            </b>
-                        </p>
-                        <p align="justify">Institute of Computing Technology, Chinese Academy of Sciences.</p>
-                        <p align="justify">
-                            This project conducts prospective research on intelligent scheduling and collaborative optimization of federated learning based on end-edge-cloud collaboration, aiming to improve the resource utilization of computing networks under hierarchical architecture.
-                            I contributed to the application form, the development of an end-edge-cloud collaborative federated learning framework, and the interim report.
-                        </p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <h3>Selected Projects</h3>
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on ****** for Resource Adaptation. <br />
-                    National Natural Science Foundation of China. 2025<br />
-                    (Contribute to the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on ****** for Trustworthy Collaborative Training. <br />
-                    National Natural Science Foundation of China. 2025<br />
-                    (Contribute to the Main Design)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on Key Technology of Resource Self-Adaptive Federated Learning for ******.<br />
-                    China Mobile Communications Corporation. 2024<br />
-                    (Contribute to the Project Declaration Guidelines)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on ****** for Heterogeneous Edge Networks. <br />
-                    Youth Projects of National Natural Science Foundation of China. 2024<br />
-                    (Contribute to the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on Key technologies of Large Model Training Based on Data Switching Service Network.<br />
-                    China Mobile Communications Corporation. 2024<br />
-                    (Contribute to Project Pre-investigation, Application and Presentation)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    ****** for 6G Native AI Architecture.<br />
-                    Applying for National Natural Science Foundation of China. 2023-2024 <br />
-                    (Contribute to the Main Design, and the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    ****** Trustworthy Intelligent Computing.<br />
-                    National Key Research and Development Program of China. 2023-2024<br />
-                    (Contribute to the Application Form, the Development of Intelligent Computing Algorithms with Multi-Dimensional Resource Collaboration, and the Midterm Inspection Report)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on Edge-Device Collaborative Computing Methods in Edge Intelligence.<br />
-                    National Natural Science Foundation of China. 2023-2024<br />
-                    (Contribute to the Development of Edge-Device Collaborative Computing Algorithms)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Federated Learning-based Intelligent Scheduling and Collaborative Optimization at the Edge of Cloud Networks.<br />
-                    Innovation Project of Institute of Computing Technology, Chinese Academy of Sciences. 2022-2024<br />
-                    (Contribute to the Application Form, the Midterm Inspection Report, the Development of Hierarchical Federated Learning Algorithms, and the Conclusive Report)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <!--
-        <ul>
-            <li>
-                <p align="justify">
-                    ******************************.<br />
-                    ****** Project Declaration Guidelines. 2023<br />
-                    (Contribute to the Project Declaration Guidelines)
-                    <br />
-                </p>
-            </li>
-        </ul>
-        -->
-
- 
-
-    
-
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on ****** in 6G Edge Networks. <br />
-                    Youth Projects of National Natural Science Foundation of China. 2023<br />
-                    (Contribute to the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Key Technology and Demonstration Application of Large Model Training for Digital City.<br />
-                    Xiong'an New Area Science and Technology Innovation Special Reserve Project. 2023<br />
-                    (Contribute to the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on ****** in Complex Dynamic Environments. <br />
-                    Key Projects of National Natural Science Foundation of China. 2023<br />
-                    (Contribute to the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Cross-modal Real-time Reliable Communication Based on Time-sensitive Networks.<br />
-                    National Key Research and Development Program of China. 2023<br />
-                    (Contribute to Progress Reports)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Federated Large Model Training over End-Edge-Cloud Networks.<br />
-                    China Mobile Communications Group Co. Ltd. 2023<br />
-                    (Contribute to Project Pre-investigation)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on ****** in Federated Learning.<br />
-                    CCF-Ant Green Computing & Privacy Computing Specialized Research Foundation. 2023<br />
-                    (Contribute to Project Pre-investigation)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    ****** in Multi-robot Collaborative Manufacturing.<br />
-                    National Key Research and Development Program of China. 2023<br />
-                    (Contribute to Project Pre-investigation)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Key Technologies of Federated Learning Against Long-tail Data.<br />
-                    China United Network Communication Group Co. Ltd.. 2023<br />
-                    (Contribute to Project Pre-investigation)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on Key Technologies of Federated Learning.<br />
-                    China Electronics Technology Group Corporation. 2023<br />
-                    (Contribute to Project Presentation)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on Vertical Federated Learning Mechanisms for Recommendation Systems.<br />
-                    Innovation and Practice Training Project for Undergraduates, Chinese Academy of Sciences, Project Leader. 2021-2023<br />
-                    (Contribute to the Application Form, Project Development, and the Conclusive Report)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Credit Risk Assessment Business for Banks based on Vertical Federated Learning.<br />
-                    Huaxia Bank Co. Ltd.. 2022<br />
-                    (Contribute to the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on ****** for Resource-constrained Internet of Things Scenarios.<br />
-                    Youth Project of National Natural Science Foundation of China. 2022<br />
-                    (Contribute to the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Federated Learning to Mobile Banking Transactions in Anti-fraud Scenarios.<br />
-                    Huaxia Bank Co. Ltd.. 2022<br />
-                    (Contribute to the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    China's National Standard Acquisition.<br />
-                    Standardization Administration of the People's Republic of China. 2022<br />
-                    (Contribute to the Sinicization of 3 Professional Standards)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Federated Learning Key Technologies for Edge-side Light-weighting.<br />
-                    China Mobile Communications Group Co. Ltd. 2022<br />
-                    (Contribute to Project Presentation)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    MindSpore Network Model and Federated Innovation Collaboration.<br />
-                    Huawei Technologies Co. Ltd.. 2021-2022<br />
-                    (Contribute to the Development of 2 Federated Learning Operators)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Privacy Computing and Federated Learning.<br />
-                    China Mobile Communications Group Co. Ltd.. 2021<br />
-                    (Contribute to the Application Form)
-                    <br />
-                </p>
-            </li>
-        </ul>
-        
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Research on Semantic Segmentation based on Activation Map Matching Knowledge Distillation.<br />
-                    Innovation Training Project for Undergraduates, Jilin University, Project Leader, National Excellent Completion. 2020-2021<br />
-                    (Contribute to the Application Form, Project Development, and the Final Report)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <h2>Mentorship</h2>
-        <h3>Master Students</h3>
-        <ul>
-            <li>
-                <p align="justify">
-                    Quyang Pan: Knowledge Cache-Driven Federated Learning Architecture
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Tian Wen: Trustworthy Federated Learning
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Wen Wang: Federated Learning over Non-ideal Communication Channels
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <h3>Undergraduate Students</h3>
-        <ul>
-            <li>
-                <p align="justify">
-                    Tian Wen: Trustworthy Federated Learning (Next at Institute of Computing Technology, Chinese Academy of Sciences)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Zeju Li: Hierarchical Federated Learning (Next at Chinese University of Hong Kong)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <ul>
-            <li>
-                <p align="justify">
-                    Yuhan Tang: Poisoning Attacks in Federated Distillation (Next at Hong Kong University of Science and Technology)
-                    <br />
-                </p>
-            </li>
-        </ul>
-
-
-        <ul>
-            <li>
-                <p align="justify">
-                    Aoxu Zhang: Personalized Federated Distillation (Next at Rutgers University)
-                    <br />
-                </p>
-            </li>
-        </ul>
-    
-        <!--
-    <ul>
-        <li>
-            <p align="justify">
-                Pengyuan Shen: Knowledge Cache-driven Federated Learning and its Applications (Next at Beijing Jiaotong University)
-                <br />
-            </p>
-        </li>
-    </ul>
-        -->
-        <!--
-    <h3>Student Design Project Supervision</h3>
-    <ul>
-        <li>
-            <p align="justify">
-                Cache-driven Federated Learning for Personalized Text Classification. 2023-2024
-                <br />
-            </p>
-        </li>
-    </ul>
-
-
-    <ul>
-        <li>
-            <p align="justify">
-                Secure Aggregation in Federated Distillation. 2023-2024
-                <br />
-            </p>
-        </li>
-    </ul>
-
-
-    <ul>
-        <li>
-            <p align="justify">
-                Logits Poisoning Attack in Federated Distillation. 2023-2024
-                <br />
-            </p>
-        </li>
-    </ul>
-    -->
-    
-        <div id="footer">
-            <a href="https://info.flagcounter.com/n51J"><img src="https://s05.flagcounter.com/count2/n51J/bg_FFFFFF/txt_000000/border_CCCCCC/columns_5/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0" /> <br />Unique Visitors Since June 2022</a>
-            <div id="footer-text">
-                <br />Page generated in 2025-05-22, by <a href="https://wuzhiyuan2000.github.io/">Zhiyuan Wu</a>.
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="profile-section">
+                    <div class="profile-image">
+                        <img src="picture/wuzhiyuan.jpg" alt="吴致远">
+                    </div>
+                    <div class="profile-info">
+                        <h1 class="name-title">吴致远</h1>
+                        <div class="english-name">Zhiyuan Wu (Jerry)</div>
+                        <div class="title">清华大学计算机科学与技术系 博士研究生</div>
+                        <div class="contact-info">
+                            <span>📍 北京市海淀区双清路30号</span>
+                            <span>📧 wuzhiyuan2000 [at] gmail.com</span>
+                        </div>
+                        <div class="links">
+                            <a href="https://scholar.google.com/citations?user=Ry0tmJUAAAAJ&hl=en">🎓 Google Scholar</a>
+                            <a href="https://github.com/wuzhiyuan2000">💻 Github</a>
+                            <a href="pdf/resume_en.pdf">📄 English Resume</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="motto">
+            打造世界领先的算网融合AI服务引擎
+            </br>
+            Building the World's Leading AI Service Engine with Computing-Network Convergence
+        </div>
+
+        <div class="section" id="about">
+            <h2 class="section-title">个人简介</h2>
+            <div class="about-content">
+                <p>
+                    我是清华大学计算机科学与技术系的博士研究生，师从<a href="https://nasp.cs.tsinghua.edu.cn/lidan.html">李丹</a>教授 (IEEE Fellow)，<a href="https://gaokaihui.com/">高凯辉</a>助理研究员和<a href="https://drchen.li/">陈力</a>副研究员。此前，我以最高荣誉在中国科学院计算技术研究所取得硕士学位，师从<a href="https://ict.cas.cn/sourcedb/cn/jssrck/201612/t20161205_4716449.html">王煜炜</a>高级工程师，<a href="https://www.ict.ac.cn/sourcedb/cn/jssrck/202504/t20250429_7635508.html">孙胜</a>副研究员和<a href="https://ict.cas.cn/sourcedb/cn/jssrck/200909/t20090917_2496676.html">刘敏</a>研究员。
+                </p>
+                <p>
+                    我的研究方向是<strong>智算网络、并行策略与边云协同</strong>。通过整合计算机网络、体系结构、操作系统与人工智能的交叉视角，致力于设计和优化面向新兴AI负载的大模型服务系统，旨在有效弥合基础设施能力与实际应用需求之间的鸿沟，重点关注吞吐量、端到端延迟与资源利用效率。我的长期研究愿景是打造世界领先的算网融合AI服务引擎，实现分布式智算资源的统筹协同与普惠应用。
+                </p>
+                <p>
+                    我的代表性研究成果是<strong>凝聚联邦学习</strong>，发表于计算机网络领域CCF-A类会议INFOCOM。
+                    该研究首创性地提出了层次化资源适配的联邦学习框架，开辟了端-边-云协同的大规模模型训练新范式。
+                    该论文在IEEE Xplore数据库中<strong>连续4个月位列同届会议论文受欢迎度榜单前2名</strong>。
+                    我以第一作者身份在计算机系统结构与计算机网络领域顶级期刊和会议发表多项研究成果，包括TPDS、TMC、INFOCOM等。研究工作获得学术界的广泛认可，部分论文<strong>入选ESI高被引论文</strong>，多篇工作登上IEEE Xplore受欢迎论文榜单，相关工作已衍生出十余种研究变体。
+                </p>
+                <p>
+                    基于已有的科研基础，我参与开发的核心机制应用于华为商用AI开源框架MindSpore。研究生期间获得<strong>计算所最高荣誉所长特别奖、中国科学院院长奖</strong>，并多次荣获研究生国家奖学金。此外，我曾在知名高校与机构的学术活动中担任主讲人十余次，累计覆盖线上线下听众三万余人次。
+                </p>
+            </div>
+        </div>
+
+        <div class="section" id="publications">
+            <h2 class="section-title">学术论文</h2>
+            <div class="publication-note"><strong>注：</strong><strong><u>加粗与下划线</u></strong>标识表示本人或在本人直接指导下的学生担任第一作者。星号(*)标识表示通讯作者。如需查阅完整的学术论文目录，请访问本人的<a href="https://scholar.google.com/citations?user=Ry0tmJUAAAAJ&hl=en">谷歌学术</a>。
+                
+            </div>
+            <ul class="publication-list">
+                <li class="publication-item">
+                    <div class="pub-title">
+                        <a href="https://ieeexplore.ieee.org/document/10163770">
+                            FedICT: Federated Multi-task Distillation for Multi-access Edge Computing
+                        </a>
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Zhiyuan Wu</u></strong>, Sheng Sun, Yuwei Wang*, Min Liu, Quyang Pan, Xuefeng Jiang, and Bo Gao
+                    </div>
+                    <div class="pub-venue">
+                        IEEE Transactions on Parallel and Distributed Systems (TPDS), 2024
+                    </div>
+                    <div class="pub-note">计算机系统结构，CCF-A类，同年仅发表162篇</div>
+                    <div class="pub-highlight">🏆 ESI高被引论文</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        <a href="https://ieeexplore.ieee.org/document/10621254">
+                            Agglomerative Federated Learning: Empowering Larger Model Training via End-Edge-Cloud Collaboration
+                        </a>
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Zhiyuan Wu</u></strong>, Sheng Sun, Yuwei Wang*, Min Liu, Bo Gao, Quyang Pan, Tianliu He, and Xuefeng Jiang
+                    </div>
+                    <div class="pub-venue">
+                        IEEE International Conference on Computer Communications (INFOCOM), 2024
+                    </div>
+                    <div class="pub-note">计算机网络，CCF-A类</div>
+                    <div class="pub-highlight">🏆 连续四个月在IEEE Xplore中入选INFOCOM 2024受欢迎程度的前2名，INFOCOM会议论文集中最高排名3/1000+</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        <a href="https://ieeexplore.ieee.org/document/10420495">
+                            FedCache: A Knowledge Cache-driven Federated Learning Architecture for Personalized Edge Intelligence
+                        </a>
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Zhiyuan Wu</u></strong>, Sheng Sun, Yuwei Wang*, Min Liu, Ke Xu, Wen Wang, Xuefeng Jiang, Bo Gao, and Jinda Lu
+                    </div>
+                    <div class="pub-venue">
+                        IEEE Transactions on Mobile Computing (TMC), 2024
+                    </div>
+                    <div class="pub-note">计算机网络，CCF-A类</div>
+                    <div class="pub-highlight">🏆 连续两个月入选IEEE Xplore受欢迎论文榜单，最高排名前2%</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        <a href="https://dl.acm.org/doi/10.1145/3639369">
+                            Exploring the Distributed Knowledge Congruence in Proxy-data-free Federated Distillation
+                        </a>
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Zhiyuan Wu</u></strong>, Sheng Sun, Yuwei Wang*, Min Liu, Quyang Pan, Junbo Zhang, Zeju Li, and Qingxiang Liu
+                    </div>
+                    <div class="pub-venue">
+                        ACM Transactions on Intelligent Systems and Technology (TIST), 2024
+                    </div>
+                    <div class="pub-note">模式识别与智能系统，CAA-A类</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        <a href="https://arxiv.org/abs/2501.00693">
+                            Beyond Model Scale Limits: End-Edge-Cloud Federated Learning with Self-Rectified Knowledge Agglomeration
+                        </a>
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Zhiyuan Wu</u></strong>, Sheng Sun, Yuwei Wang*, Min Liu, Ke Xu, Quyang Pan, Bo Gao, and Tian Wen
+                    </div>
+                    <div class="pub-venue">
+                        IEEE/ACM Transactions on Networking (ToN), 2025
+                    </div>
+                    <div class="pub-note">计算机网络，CCF-A类，在审</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        Recursive Offloading for LLM Serving in Multi-tier Networks
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Zhiyuan Wu</u></strong>, Sheng Sun, Yuwei Wang*, Bo Gao, Jinda Lu, Zheming Yang, Tian Wen
+                    </div>
+                    <div class="pub-venue">
+                        IEEE Transactions on Mobile Computing (TMC), 2025
+                    </div>
+                    <div class="pub-note">计算机网络，CCF-A类，在审</div>
+                </li>
+                
+                <!--
+                <li class="publication-item">
+                    <div class="pub-title">
+                        SVAFD: A Secure and Verifiable Co-Aggregation Protocol for Federated Distillation
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Tian Wen</u></strong>, Sheng Sun, Yuwei Wang*, Peiyan Chen, Zhiyuan Wu, Min Liu, Bo Gao
+                    </div>
+                    <div class="pub-venue">
+                        IEEE Transactions on Information Forensics and Security (TIFS), 2025
+                    </div>
+                    <div class="pub-note">信息安全，CCF-A类，在投</div>
+                </li>
+                -->
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        Re-architecting Personalized Federated Learning for Demanding Edge Environments
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Quyang Pan</u></strong>, Sheng Sun, Tingting Wu, Zhiyuan Wu, Yuwei Wang*, Min Liu, Bo Gao, Jingyuan Wang
+                    </div>
+                    <div class="pub-venue">
+                        Advances in Neural Information Processing Systems (NeurIPS), 2025
+                    </div>
+                    <div class="pub-note">人工智能，CCF-A类，在审</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        <a href="https://ieeexplore.ieee.org/document/10561520">
+                            Staleness-Controlled Asynchronous Federated Learning: Accuracy and Efficiency Tradeoff
+                        </a>
+                    </div>
+                    <div class="pub-authors">
+                        Sheng Sun, Zengqi Zhang, Quyang Pan, Min Liu*, Yuwei Wang, Tianliu He, Yali Chen, and Zhiyuan Wu
+                    </div>
+                    <div class="pub-venue">
+                        IEEE Transactions on Mobile Computing (TMC), 2024
+                    </div>
+                    <div class="pub-note">计算机网络，CCF-A类</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        FNBench: Benchmarking Robust Federated Learning against Noisy Labels
+                    </div>
+                    <div class="pub-authors">
+                        Xuefeng Jiang, Jia Li, Nannan Wu, Zhiyuan Wu, Xujing Li, Sheng Sun, Gang Xu, Yuwei Wang, Qi Li, Min Liu*
+                    </div>
+                    <div class="pub-venue">
+                        IEEE Transactions on Dependable and Secure Computing (TDSC), 2024
+                    </div>
+                    <div class="pub-note">信息安全，CCF-A类，大修</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        <a href="https://arxiv.org/abs/2401.00622">
+                            Federated Class-Incremental Learning with New-Class Augmented Self-Distillation
+                        </a>
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Zhiyuan Wu</u></strong>, Tianliu He, Sheng Sun, Yuwei Wang*, Min Liu, Bo Gao, and Xuefeng Jiang
+                    </div>
+                    <div class="pub-venue">
+                        Journal of Computer Science and Technology (JCST), 2025
+                    </div>
+                    <div class="pub-note">新兴/交叉，CCF-B类</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        RADD: A Real-time and Accurate Method for DDoS Detection Based on In-Network Computing
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Wen Wang</u></strong>, Shuyong Zhu*, Zhiyuan Wu, Lu Lu, Zhiqiang Li, Hongwei Yang, Yujun Zhang
+                    </div>
+                    <div class="pub-venue">
+                        IEEE International Conference on Communications (ICC), 2024
+                    </div>
+                    <div class="pub-note">通信，CIE-I类</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        NET-SM4: A High-performance Secure Encryption Mechanism Based on In-Network Computing
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Wen Wang</u></strong>, Shuyong Zhu*, Tianyu Zuo, Zhiyuan Wu, Yujun Zhang
+                    </div>
+                    <div class="pub-venue">
+                        IEEE/ACM International Symposium on Quality of Service (IWQoS), 2025
+                    </div>
+                    <div class="pub-note">计算机网络，CCF-B类</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        Towards Efficient Secure Aggregation Based on In-Network Computing
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Wen Wang</u></strong>, Shuyong Zhu*, Qingqing Ren, Zhiyuan Wu, Yujun Zhang
+                    </div>
+                    <div class="pub-venue">
+                        IEEE/ACM International Symposium on Quality of Service (IWQoS), 2025
+                    </div>
+                    <div class="pub-note">计算机网络，CCF-B类，海报论文</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        Tackling Noisy Clients in Federated Learning with End-to-end Label Correction
+                    </div>
+                    <div class="pub-authors">
+                        Xuefeng Jiang, Sheng Sun, Jia Li, Jingjing Xue, Runhan Li, Zhiyuan Wu, Gang Xu, Yuwei Wang and Min Liu*
+                    </div>
+                    <div class="pub-venue">
+                        ACM International Conference on Information and Knowledge Management (CIKM), 2024
+                    </div>
+                    <div class="pub-note">数据挖掘，CCF-B类，口头报告</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        Spirit Distillation: A Model Compression Method with Multi-domain Knowledge Transfer
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Zhiyuan Wu</u></strong>, Yu Jiang, Minghao Zhao, Chupeng Cui, Zongmin Yang, Xinhui Xue, and Hong Qi*
+                    </div>
+                    <div class="pub-venue">
+                        International Conference on Knowledge Science, Engineering and Management (KSEM), 2021
+                    </div>
+                    <div class="pub-note">人工智能，CCF-C类，本科生成果</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        Logits Poisoning Attack in Federated Distillation
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Yuhan Tang</u></strong>, Zhiyuan Wu, Bo Gao*, Tian Wen, Yuwei Wang, Sheng Sun
+                    </div>
+                    <div class="pub-venue">
+                        International Conference on Knowledge Science, Engineering and Management (KSEM), 2024
+                    </div>
+                    <div class="pub-note">人工智能，CCF-C类，本科生成果</div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="pub-title">
+                        Peak-Controlled Logits Poisoning Attack in Federated Distillation
+                    </div>
+                    <div class="pub-authors">
+                        <strong><u>Yuhan Tang</u></strong>, Aoxu Zhang, Zhiyuan Wu, Bo Gao*, Tian Wen, Yuwei Wang, Sheng Sun
+                    </div>
+                    <div class="pub-venue">
+                        Discover Computing (DC), 2025
+                    </div>
+                    <div class="pub-note">数据挖掘，CCF-C类，本科生成果，大修</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section" id="awards">
+            <h2 class="section-title">奖项荣誉</h2>
+            <ul class="award-list">
+                <li class="award-item">
+                    <div class="award-title">中科院计算所所长特别奖 <span class="award-year">2024</span></div>
+                    <div class="award-highlight">🏆 计算所最高荣誉，全所获奖共7人，其中硕士生仅1人</div>
+                </li>
+                <li class="award-item">
+                    <div class="award-title">中国科学院院长奖 <span class="award-year">2025</span></div>
+                    <div class="award-highlight">🏆 计算所获奖共7人，其中硕士生仅1人</div>
+                </li>
+                <li class="award-item">
+                    <div class="award-title">研究生国家奖学金 <span class="award-year">2023</span></div>
+                    <div class="award-highlight">🏆 计算所当届仅1人</div>
+                </li>
+                <li class="award-item">
+                    <div class="award-title">研究生国家奖学金 <span class="award-year">2024</span></div>
+                </li>
+                <li class="award-item">
+                    <div class="award-title">易方达金融科技新生奖学金 <span class="award-year">2023</span></div>
+                    <div>计算所网络研究部仅1人</div>
+                </li>
+                <li class="award-item">
+                    <div class="award-title">中国科学院大学三好学生标兵 <span class="award-year">2024</span></div>
+                    <div>在学人数1%</div>
+                </li>
+                <li class="award-item">
+                    <div class="award-title">北京市优秀毕业生 <span class="award-year">2025</span></div>
+                </li>
+                <li class="award-item">
+                    <div class="award-title">中国科学院大学优秀毕业生 <span class="award-year">2025</span></div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section" id="service">
+            <h2 class="section-title">学术服务</h2>
+            <div class="publication-note">
+                <strong>注：</strong>以下期刊/会议均为CCF-A类，THU-A类或CAA-A类。
+            </div>
+            
+            <div class="service-subsection">
+                <h3 class="service-title">期刊审稿人</h3>
+                <ul class="service-list">
+                    <li class="service-item">IEEE Transactions on Mobile Computing</li>
+                    <li class="service-item">IEEE Transactions on Pattern Analysis and Machine Intelligence</li>
+                    <li class="service-item">Information Fusion</li>
+                    <li class="service-item">Pattern Recognition</li>
+                </ul>
+            </div>
+
+            <div class="service-subsection">
+                <h3 class="service-title">会议技术程序委员会成员/审稿人</h3>
+                <ul class="service-list">
+                    <li class="service-item">International Conference on Machine Learning</li>
+                    <li class="service-item">International Conference on Learning Representations</li>
+                    <li class="service-item">Advances in Neural Information Processing Systems</li>
+                    <li class="service-item">AAAI Conference on Artificial Intelligence</li>
+                    <li class="service-item">International Joint Conference on Artificial Intelligence</li>
+                    <li class="service-item">ACM International Conference on Multimedia</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" id="projects">
+            <h2 class="section-title">科研项目</h2>
+            <ul class="project-list">
+                <li class="project-item">
+                    <div class="project-title">基于区块链的大规模分布式可信智能计算关键技术及应用</div>
+                    <div class="project-role">国家重点研发计划项目，项目申请与研发</div>
+                </li>
+                <li class="project-item">
+                    <div class="project-title">边缘智能中的端边设备协同计算方法研究</div>
+                    <div class="project-role">国家自然科学基金面上项目，项目研发</div>
+                </li>
+                <li class="project-item">
+                    <div class="project-title">基于联邦学习的云网边端智能调度与协同优化</div>
+                    <div class="project-role">中国科学院计算技术研究所所创新课题，项目申请与研发</div>
+                </li>
+                <li class="project-item">
+                    <div class="project-title">MindSpore网络模型与创新合作</div>
+                    <div class="project-role">华为企业合作项目，项目研发</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section" id="views">
+            <h2 class="section-title">科研观点</h2>
+            <ul class="project-list">
+                <li class="project-item">
+                    <div class="project-title">科研探索的三驾马车：战略、战术与热情</div>
+                    <div class="project-role">中国科学院计算技术研究所 校友通讯</div>
+                </li>
+                <li class="project-item">
+                    <div class="project-title">挣脱范式引力，洞察问题本源</div>
+                    <div class="project-role">中国科学院计算技术研究所 官方微信公众号</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <a href="https://info.flagcounter.com/n51J">
+                <img src="https://s05.flagcounter.com/count2/n51J/bg_FFFFFF/txt_000000/border_CCCCCC/columns_5/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0">
+            </a>
+            <p>自2022年6月起的独立访客统计数据</p>
+            <p>页面最后更新时间：2025年7月，由<a href="https://wuzhiyuan2000.github.io/">吴致远</a>开发维护</p>
+        </div>
     </div>
-
-
-​	
 </body>
 </html>
