@@ -39,6 +39,9 @@
             line-height: 1.65;
             color: var(--text-primary);
             background: var(--bg-light);
+        }
+
+        html {
             scroll-behavior: smooth;
         }
 
@@ -298,12 +301,7 @@
             box-shadow: 0 4px 25px var(--shadow-light);
             border: 1px solid var(--border-light);
             transition: transform 0.2s ease;
-            padding-top: 70px; /* 新增：为锚点跳转增加顶部内边距，防止内容被导航栏遮挡 */
-            margin-top: -50px; /* 新增：抵消一部分内边距，保持视觉间距不变 */
-        }
-
-        .section:first-of-type {
-             margin-top: 0; /* 第一个section不需要负外边距 */
+            scroll-margin-top: 100px;
         }
 
         .section:hover {
@@ -526,6 +524,17 @@
             border-left-color: var(--tsinghua-purple);
         }
 
+        .service-name {
+            color: var(--tsinghua-purple-dark);
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .service-meta {
+            font-size: 0.95em;
+            color: var(--text-muted);
+        }
+
         /* Projects */
         .project-list {
             list-style: none;
@@ -593,12 +602,17 @@
             }
 
             .profile-section {
-                display: flex;
-                align-items: center;
-                gap: 60px;
-                flex-wrap: wrap;
-                justify-content: center;
+                gap: 30px;
                 flex-direction: row-reverse; /* This moves the image to the right side */
+            }
+
+            .profile-image {
+                margin-left: 0;
+            }
+
+            .profile-info {
+                width: 100%;
+                min-width: 0;
             }
 
             .profile-image img {
@@ -616,8 +630,7 @@
 
             .section {
                 padding: 30px 25px;
-                padding-top: 60px; /* 响应式调整锚点边距 */
-                margin-top: -40px;
+                scroll-margin-top: 120px;
             }
 
             .section-title {
@@ -658,8 +671,6 @@
 
             .section {
                 padding: 25px 20px;
-                padding-top: 55px; /* 响应式调整锚点边距 */
-                margin-top: -35px;
             }
 
             .motto {
@@ -731,7 +742,7 @@
                             <span>📧 wu-zy25 [at] tsinghua.org.cn</span>
                         </div>
                         <div class="links">
-                            <a href="https://scholar.google.com/citations?user=Ry0tmJUAAAAJ&hl=en">🎓 Google Scholar</a>
+                            <a href="https://scholar.google.com/citations?user=Ry0tmJUAAAAJ&amp;hl=en">🎓 Google Scholar</a>
                             <a href="https://github.com/wuzhiyuan2000">💻 Github</a>
                             <a href="pdf/resume_en.pdf">📄 English Resume</a>
                         </div>
@@ -742,7 +753,7 @@
 
         <div class="motto">
             打造世界领先的算网融合AI服务引擎
-            </br>
+            <br>
             Building the World's Leading AI Service Engine with Computing-Network Convergence
         </div>
 
@@ -757,10 +768,6 @@
                 <p>
                     &emsp;&emsp;在清华大学攻读博士学位期间，我师从<a href="https://nasp.cs.tsinghua.edu.cn/lidan.html">李丹</a>教授 (IEEE Fellow)，<a href="https://wangshuaizs.github.io/">王帅</a>副研究员，<a href="https://drchen.li/">陈力</a>副研究员和<a href="https://gaokaihui.com/">高凯辉</a>副研究员。在此之前，我在中国科学院计算技术研究所取得硕士学位（期间获得在校生最高荣誉），师从<a href="https://ict.cas.cn/sourcedb/cn/jssrck/201612/t20161205_4716449.html">王煜炜</a>高级工程师，<a href="https://www.ict.ac.cn/sourcedb/cn/jssrck/202504/t20250429_7635508.html">孙胜</a>副研究员和<a href="https://ict.cas.cn/sourcedb/cn/jssrck/200909/t20090917_2496676.html">刘敏</a>研究员。
                     我曾入选<strong>国家一级学会学位论文激励计划</strong>、国家级拔尖学生培养计划；获<strong>中国科学院院长奖、计算所所长特别奖</strong>，并多次获评研究生国家奖学金。
-                
-                <p>
-                    
-                    
                 </p>
                 <p>
                     &emsp;&emsp;在科研成果方面，我以第一作者身份在TPDS，TMC，INFOCOM等CCF-A类顶级期刊与会议上发表多篇学术论文，部分成果曾入选<strong>ESI高被引论文</strong>，<strong>连续4个月位列同届会议论文受欢迎度榜单前2名</strong>，或衍生出十余种研究变体，产生了广泛的学术影响力。
@@ -783,7 +790,7 @@
 
         <div class="section" id="publications">
             <h2 class="section-title">学术论文</h2>
-            <div class="publication-note"><strong>注：</strong><strong><u>加粗与下划线</u></strong>标识表示本人或在本人直接指导下的学生担任第一作者。星号(*)标识表示通讯作者。如需查阅完整的学术论文目录，请访问本人的<a href="https://scholar.google.com/citations?user=Ry0tmJUAAAAJ&hl=en">谷歌学术</a>。
+            <div class="publication-note"><strong>注：</strong><strong><u>加粗与下划线</u></strong>标识表示本人或在本人直接指导下的学生担任第一作者。星号(*)标识表示通讯作者。如需查阅完整的学术论文目录，请访问本人的<a href="https://scholar.google.com/citations?user=Ry0tmJUAAAAJ&amp;hl=en">谷歌学术</a>。
                 
             </div>
             <!--<h3 class="publication-subsection-title">学位论文</h3>-->
@@ -1016,7 +1023,7 @@
 
 
 
-
+                <!--
                 <li class="publication-item">
                     <div class="pub-title">
                         FNBench: Benchmarking Robust Federated Learning against Noisy Labels
@@ -1029,7 +1036,7 @@
                     </div>
                     <div class="pub-note">信息安全，CCF-A类，在审</div>
                 </li>
-
+                -->
 
                 <li class="publication-item">
                     <div class="pub-title">
@@ -1149,11 +1156,11 @@
                 </li>
                 <li class="award-item">
                     <div class="award-title">易方达金融科技新生奖学金 <span class="award-year">2023</span></div>
-                    <div>计算所网络研究部共1人</div>
+                    <div class="service-meta">计算所网络研究部共1人</div>
                 </li>
                 <li class="award-item">
                     <div class="award-title">中国科学院大学三好学生标兵 <span class="award-year">2024</span></div>
-                    <div>在学人数1%</div>
+                    <div class="service-meta">在学人数1%</div>
                 </li>
                 <li class="award-item">
                     <div class="award-title">北京市优秀毕业生 <span class="award-year">2025</span></div>
@@ -1248,17 +1255,34 @@
 
         <div class="section" id="service">
             <h2 class="section-title">学术服务</h2>
-            <div class="publication-note">
-                <strong>注：</strong>以下期刊/会议均为CCF-A类。
-            </div>
-            
+
             <div class="service-subsection">
                 <h3 class="service-title">期刊审稿人</h3>
                 <ul class="service-list">
-                    <li class="service-item">IEEE Transactions on Parallel and Distributed Systems (TPDS)</li>
-                    <li class="service-item">IEEE Journal on Selected Areas in Communications (JSAC)</li>
-                    <li class="service-item">IEEE Transactions on Mobile Computing (TMC)</li>
-                    <li class="service-item">IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)</li>
+                    <li class="service-item">
+                        <div class="service-name">IEEE Transactions on Parallel and Distributed Systems (TPDS)</div>
+                        <div class="service-meta">计算机系统结构，CCF-A类</div>
+                    </li>
+                    <li class="service-item">
+                        <div class="service-name">IEEE Journal on Selected Areas in Communications (JSAC)</div>
+                        <div class="service-meta">计算机网络，CCF-A类</div>
+                    </li>
+                    <li class="service-item">
+                        <div class="service-name">IEEE Transactions on Mobile Computing (TMC)</div>
+                        <div class="service-meta">计算机网络，CCF-A类</div>
+                    </li>
+                    <li class="service-item">
+                        <div class="service-name">IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)</div>
+                        <div class="service-meta">人工智能，CCF-A类</div>
+                    </li>
+                    <li class="service-item">
+                        <div class="service-name">Pattern Recognition (PR)</div>
+                        <div class="service-meta">模式识别与智能系统，CAA-A类</div>
+                    </li>
+                    <li class="service-item">
+                        <div class="service-name">Information Fusion (IF)</div>
+                        <div class="service-meta">模式识别与智能系统，CAA-A类</div>
+                    </li>
                     <!--
                     <li class="service-item">Information Fusion</li>
                     <li class="service-item">Pattern Recognition</li>
@@ -1269,15 +1293,33 @@
             <div class="service-subsection">
                 <h3 class="service-title">会议技术程序委员会成员/审稿人</h3>
                 <ul class="service-list">
-                    <li class="service-item">International Conference on Machine Learning (ICML)</li>
-                    <li class="service-item">International Conference on Learning Representations (ICLR)</li>
-                    <li class="service-item">Advances in Neural Information Processing Systems (NeurIPS)</li>
-                    <li class="service-item">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</li>
-                    <li class="service-item">AAAI Conference on Artificial Intelligence (AAAI)</li>
+                    <li class="service-item">
+                        <div class="service-name">International Conference on Machine Learning (ICML)</div>
+                        <div class="service-meta">人工智能，CCF-A类</div>
+                    </li>
+                    <li class="service-item">
+                        <div class="service-name">International Conference on Learning Representations (ICLR)</div>
+                        <div class="service-meta">人工智能，CCF-A类</div>
+                    </li>
+                    <li class="service-item">
+                        <div class="service-name">Advances in Neural Information Processing Systems (NeurIPS)</div>
+                        <div class="service-meta">人工智能，CCF-A类</div>
+                    </li>
+                    <li class="service-item">
+                        <div class="service-name">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</div>
+                        <div class="service-meta">人工智能，CCF-A类</div>
+                    </li>
+                    <li class="service-item">
+                        <div class="service-name">AAAI Conference on Artificial Intelligence (AAAI)</div>
+                        <div class="service-meta">人工智能，CCF-A类</div>
+                    </li>
                     <!--
                     <li class="service-item">International Joint Conference on Artificial Intelligence</li>
                     -->
-                    <li class="service-item">ACM International Conference on Multimedia (MM)</li>
+                    <li class="service-item">
+                        <div class="service-name">ACM International Conference on Multimedia (MM)</div>
+                        <div class="service-meta">计算机图形学与多媒体，CCF-A类</div>
+                    </li>
                 </ul>
             </div>
         </div>
